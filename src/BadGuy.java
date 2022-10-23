@@ -1,4 +1,5 @@
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -29,6 +30,11 @@ public class BadGuy extends GameObject  {
 	void addToScene(Group root) {
 		
 		
+	}
+	
+	@Override
+	Node getView() {
+		return myBadGuy;
 	}
 	
 	
