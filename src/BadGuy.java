@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
@@ -7,9 +9,10 @@ public class BadGuy extends GameObject  {
 	
 	private final int WIDTH = 50;
 	private final int HEIGHT = 25;
-	
 	private Rectangle myBadGuy;
 	private int badGuyHealth;
+	
+	public ArrayList<ArrayList<BadGuy>> myBadGuys= new ArrayList<ArrayList<BadGuy>>();
 	
 	public BadGuy(Rectangle badGuy, int x, int y, int health, Paint breakerColor) {
 		myBadGuy = badGuy;
@@ -26,15 +29,19 @@ public class BadGuy extends GameObject  {
 		
 	}
 
-	@Override
-	void addToScene(Group root) {
-		
-		
-	}
 	
 	@Override
 	Node getView() {
 		return myBadGuy;
+	}
+	
+	
+	public void breakerDied(Group root) {
+		root.getChildren().remove(myBadGuy);
+	}
+	
+	public void removeHealth() {
+		badGuyHealth -= 1;
 	}
 	
 	
