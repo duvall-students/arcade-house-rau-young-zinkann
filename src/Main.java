@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -15,6 +16,10 @@ public class Main extends Application {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+	
+	
+	private Level currentLevel;
+	private Group myRoot = new Group();
 	
 	@Override
 	public void start(Stage stage) {
@@ -32,8 +37,15 @@ public class Main extends Application {
 
 	
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) {
-		Group root = new Group();
-		Scene myScene = new Scene(root, sceneWidth, sceneHeight, background);
+		currentLevel = new Level(10, 6, 1);
+		Scene myScene = new Scene(myRoot, sceneWidth, sceneHeight, background);
+		Rectangle test = new Rectangle();
+		test.setFill(Color.BLUE);
+		test.setX(SCREEN_WIDTH/2);
+		test.setY(SCREEN_HEIGHT/2);
+		myRoot.getChildren().add(test);
+		currentLevel.addEnemies(myRoot);
+		
 		return myScene;
 				
 	}
