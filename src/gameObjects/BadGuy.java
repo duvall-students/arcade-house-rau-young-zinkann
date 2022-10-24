@@ -1,3 +1,4 @@
+package gameObjects;
 import java.util.ArrayList;
 
 import javafx.scene.Group;
@@ -24,7 +25,7 @@ public class BadGuy extends GameObject  {
 	}
 
 	@Override
-	void move() {
+	void move(double elapsedTime) {
 	
 		
 	}
