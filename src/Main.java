@@ -16,6 +16,8 @@ public class Main extends Application {
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	
+	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
+	
 	@Override
 	public void start(Stage stage) {
 		stage.setScene(CreateScene(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_COLOR));
@@ -34,6 +36,10 @@ public class Main extends Application {
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) {
 		Group root = new Group();
 		Scene myScene = new Scene(root, sceneWidth, sceneHeight, background);
+		
+		// add ship
+		ship.addGameObjectToGroup(root);
+		
 		return myScene;
 				
 	}

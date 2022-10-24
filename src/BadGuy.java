@@ -43,6 +43,12 @@ public class BadGuy extends GameObject  {
 	public void removeHealth() {
 		badGuyHealth -= 1;
 	}
+
+	@Override
+	void addGameObjectToGroup(Group root) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 
