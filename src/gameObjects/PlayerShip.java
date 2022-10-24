@@ -1,3 +1,4 @@
+package gameObjects;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -20,12 +21,6 @@ public class PlayerShip extends GameObject {
 		myPlayerShip.setX(Main.SCREEN_WIDTH / 2 - (SHIP_SIZE / 2));
 		myPlayerShip.setY(Main.SCREEN_HEIGHT / 2);
 	}
-	
-	@Override
-	void move() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public Node getView() {
@@ -33,7 +28,7 @@ public class PlayerShip extends GameObject {
 		return myPlayerShip;
 	}
 
-	void addGameObjectToGroup(Group root) {
+	public void addGameObjectToGroup(Group root) {
 		// TODO Auto-generated method stub
 		root.getChildren().add(myPlayerShip);
 	}
@@ -46,6 +41,12 @@ public class PlayerShip extends GameObject {
 			System.out.println("File Not Found");
 		}
 		return image;
+	}
+
+	@Override
+	void move(double elapsedTime) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

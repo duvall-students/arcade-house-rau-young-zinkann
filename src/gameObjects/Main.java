@@ -1,3 +1,5 @@
+package gameObjects;
+import gameObjects.PlayerShip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -8,13 +10,15 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class SceneSetup extends Application {
+public class Main extends Application {
 	public static final int SCREEN_WIDTH = 1000;
 	public static final int SCREEN_HEIGHT = 500;
 	public static final Paint SCREEN_COLOR = Color.BLACK;
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+	
+	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
 	
 	@Override
 	public void start(Stage stage) {
@@ -34,6 +38,10 @@ public class SceneSetup extends Application {
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) {
 		Group root = new Group();
 		Scene myScene = new Scene(root, sceneWidth, sceneHeight, background);
+		
+		// add ship
+		ship.addGameObjectToGroup(root);
+		
 		return myScene;
 				
 	}
@@ -42,6 +50,9 @@ public class SceneSetup extends Application {
 		
 	}
 	
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
 	
 
 }
