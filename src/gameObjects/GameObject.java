@@ -11,5 +11,5 @@ public abstract class GameObject {
 	abstract Node getView();
 	
 	
-	
+	abstract void addGameObjectToGroup(Group root);
 }
