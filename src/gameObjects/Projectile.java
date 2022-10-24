@@ -23,8 +23,8 @@ public class Projectile extends GameObject {
 	
 
 	@Override
-	void move() {
-		myProjectile.setY(myProjectile.getY() + myVelocity.getY() * 5);
+	void move(double elapsedTime) {
+		myProjectile.setY(myProjectile.getY() + myVelocity.getY() * elapsedTime);
 		
 	}
 

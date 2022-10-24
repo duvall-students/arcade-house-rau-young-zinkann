@@ -25,7 +25,7 @@ public class BadGuy extends GameObject  {
 	}
 
 	@Override
-	void move() {
+	void move(double elapsedTime) {
 	
 		
 	}
