@@ -16,12 +16,14 @@ public class Level {
 	private int numEnemiesPerRow;
 	private int badGuyHealth;
 	private ArrayList<ArrayList<BadGuy>> myBadGuys = new ArrayList<ArrayList<BadGuy>>();
+	private double badGuySpeed;
 	
-	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth) {
+	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed) {
 		numEnemies = numRows * numEnemiesPerRow;
 		this.numRows = numRows;
 		this.numEnemiesPerRow = numEnemiesPerRow;
 		this.badGuyHealth = badGuyHealth;
+		this.badGuySpeed = badGuySpeed;
 	}
 	
 	public void addEnemies(Group root) {
@@ -37,7 +39,7 @@ public class Level {
 			for(int j = 0; j < numEnemiesPerRow; j++) {
 				Rectangle myRectangle = new Rectangle();
 				//create new bad guy
-				BadGuy myBadGuy = new BadGuy(myRectangle, x , y, badGuyHealth, Color.BLUE);
+				BadGuy myBadGuy = new BadGuy(myRectangle, x , y, badGuyHealth, badGuySpeed, Color.BLUE);
 				//add to root 
 				root.getChildren().add(myBadGuy.getView());
 				//add to array
@@ -47,5 +49,10 @@ public class Level {
 			}
 			myBadGuys.add(myBadGuysRow);
 		}
+	}
+	
+	
+	public ArrayList getBadGuys() {
+		return myBadGuys;
 	}
 }

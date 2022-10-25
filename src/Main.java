@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -18,8 +20,10 @@ public class Main extends Application {
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	
 	
-	private Level currentLevel = new Level(4, 6, 1);
+	private Level currentLevel = new Level(4, 6, 1, 2);
 	private Group myRoot = new Group();
+	
+	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
 	
 	@Override
 	public void start(Stage stage) {
@@ -45,6 +49,13 @@ public class Main extends Application {
 	}
 	
 	private void step (double elapsedTime, Stage stage) {
+		currentBadGuys = currentLevel.getBadGuys();
+		for(int i = 0; i < currentBadGuys.size(); i++) {
+			for(int j = 0; j < currentBadGuys.get(i).size(); j++) {
+				BadGuy currentBadGuy = currentBadGuys.get(i).get(j);
+				currentBadGuy.move(elapsedTime);
+			}
+		}
 		
 	}
 	

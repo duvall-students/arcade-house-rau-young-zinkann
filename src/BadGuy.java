@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
@@ -12,11 +13,11 @@ public class BadGuy extends GameObject  {
 	
 	private Rectangle myBadGuy;
 	private int badGuyHealth;
-	private int badGuySpeed;
+	private Point2D myVelocity;
 	
 	public ArrayList<ArrayList<BadGuy>> myBadGuys= new ArrayList<ArrayList<BadGuy>>();
 	
-	public BadGuy(Rectangle badGuy, int x, int y, int health, Paint breakerColor) {
+	public BadGuy(Rectangle badGuy, int x, int y, int health, double speed, Paint breakerColor) {
 		this.myBadGuy = badGuy;
 		myBadGuy.setWidth(WIDTH);
 		myBadGuy.setHeight(HEIGHT);
@@ -24,11 +25,12 @@ public class BadGuy extends GameObject  {
 		myBadGuy.setY(y);
 		myBadGuy.setFill(breakerColor);
 		badGuyHealth = health;
+		myVelocity = new Point2D(0, speed);
 	}
 
 	@Override
 	void move(double elapsedTime) {
-	
+		myBadGuy.setY(myBadGuy.getY() + myVelocity.getY() * elapsedTime);
 		
 	}
 
