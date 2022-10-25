@@ -6,10 +6,10 @@ import javafx.scene.shape.Rectangle;
 
 public class Level {
 	
-	public final int STARTING_X_VALUE = 10;
+	public final int STARTING_X_VALUE = 200;
 	public final int STARTING_Y_VALUE = 0;
 	public final int Y_SPACE_VALUE = 35;
-	public final int X_SPACE_VALUE = 150;
+	public final int X_SPACE_VALUE = 100;
 	
 	private int numEnemies;
 	private int numRows;
@@ -30,23 +30,22 @@ public class Level {
 		int y = STARTING_Y_VALUE;
 		for(int i = 0; i < numRows; i++) {
 			//reset after one row
-			ArrayList<BadGuy> myBreakersRow = new ArrayList<BadGuy>();
+			ArrayList<BadGuy> myBadGuysRow = new ArrayList<BadGuy>();
 			x = STARTING_X_VALUE;
 			y += Y_SPACE_VALUE;
 			//loop through each row
 			for(int j = 0; j < numEnemiesPerRow; j++) {
-
 				Rectangle myRectangle = new Rectangle();
-				//create new breaker object
+				//create new bad guy
 				BadGuy myBadGuy = new BadGuy(myRectangle, x , y, badGuyHealth, Color.BLUE);
 				//add to root 
 				root.getChildren().add(myBadGuy.getView());
 				//add to array
-				myBreakersRow.add(myBadGuy);
+				myBadGuysRow.add(myBadGuy);
 				//change x value
 				x += X_SPACE_VALUE;
 			}
-			myBadGuys.add(myBreakersRow);
+			myBadGuys.add(myBadGuysRow);
 		}
 	}
 }
