@@ -20,7 +20,7 @@ public class Main extends Application {
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	
 	
-	private Level currentLevel = new Level(4, 6, 100, 2);
+	private Level currentLevel = new Level(4, 6, 1000, 2);
 	private Group myRoot = new Group();
 	
 	private ArrayList<ArrayList<BadGuy>> currentBadGuys;

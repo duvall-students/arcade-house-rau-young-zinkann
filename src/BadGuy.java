@@ -25,7 +25,7 @@ public class BadGuy extends GameObject  {
 		myBadGuy.setY(y);
 		myBadGuy.setFill(breakerColor);
 		badGuyHealth = health;
-		myVelocity = new Point2D(0, speed);
+		myVelocity = new Point2D(speed, speed);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class BadGuy extends GameObject  {
 		badGuyHealth -= 1;
 	}
 	
-	public boolean collision(Rectangle projectile) {
+	public boolean isCollision(Rectangle projectile) {
 		if(projectile.intersects(myBadGuy.getBoundsInLocal())) {
 			return true;
 		}
