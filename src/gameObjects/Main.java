@@ -41,10 +41,10 @@ public class Main extends Application {
 		Group root = new Group();
 		Scene myScene = new Scene(root, sceneWidth, sceneHeight, background);
 
-		// add ship
+		// add ship - Chris
 		ship.addGameObjectToGroup(root);
 		
-		// add key event handler to the scene
+		// add key event handler to the scene - Chris
 		myScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
