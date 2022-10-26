@@ -1,9 +1,10 @@
 package gameObjects;
 
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 
 public class Projectile extends GameObject {
@@ -14,12 +15,13 @@ public class Projectile extends GameObject {
 	private Rectangle myProjectile;
 	private Point2D myVelocity;
 	
-	public Projectile(Rectangle Projectile, int x, int y) {
-		myProjectile = Projectile;
+	public Projectile(Point2D pos) {
+		super(pos);
+		myProjectile = new Rectangle();
 		myProjectile.setWidth(WIDTH);
 		myProjectile.setHeight(HEIGHT);
-		myProjectile.setX(x);
-		myProjectile.setX(y);
+		myProjectile.setX(pos.getX());
+		myProjectile.setY(pos.getY());
 		myVelocity = new Point2D(MOVE_SPEED, MOVE_SPEED);
 	}
 	
@@ -31,7 +33,7 @@ public class Projectile extends GameObject {
 	}
 
 	@Override
-	Node getView() {
+	public Node getView() {
 		return myProjectile;
 	}
 

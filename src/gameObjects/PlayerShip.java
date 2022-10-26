@@ -21,6 +21,7 @@ public class PlayerShip extends GameObject {
 
 
 	public PlayerShip(Image shipImage) {
+		super(shipImage);
 		myPlayerShip = new ImageView(shipImage);
 		myPlayerShip.setFitHeight(SHIP_SIZE);
 		myPlayerShip.setFitWidth(SHIP_SIZE);
@@ -64,7 +65,7 @@ public class PlayerShip extends GameObject {
 			handleKeyInputRight();
 		}
 		else if (code == KeyCode.SPACE) {
-			new Projectile(new Rectangle(), (int)myPlayerShip.getLayoutX(), (int)myPlayerShip.getLayoutY());
+			// create new projectile?
 		}
 	}
 
