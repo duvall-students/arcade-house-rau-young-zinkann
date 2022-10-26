@@ -1,4 +1,5 @@
 package gameObjects;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -20,7 +21,9 @@ public class Main extends Application {
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
+	// ship
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
+	// collection of spawned projectiles
 
 	@Override
 	public void start(Stage stage) {
