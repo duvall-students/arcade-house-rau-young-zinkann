@@ -15,10 +15,11 @@ public class BadGuy extends GameObject  {
 	private Rectangle myBadGuy;
 	private int badGuyHealth;
 	private String imagePath = "blahblah.gif";
+	private Point2D myVelocity;
 	
 	public ArrayList<ArrayList<BadGuy>> myBadGuys= new ArrayList<ArrayList<BadGuy>>();
 	
-	public BadGuy(String imagePath, double width, double height, Point2D pos) throws FileNotFoundException {
+	public BadGuy(String imagePath, double width, double height, double speed, Point2D pos) throws FileNotFoundException {
 		super(imagePath, width, height, pos);
 		//myBadGuy = badGuy;
 		myBadGuy.setWidth(width);
@@ -27,11 +28,12 @@ public class BadGuy extends GameObject  {
 //		myBadGuy.setX(x);
 //		myBadGuy.setY(y);
 //		badGuyHealth = health;
+		myVelocity = new Point2D(speed, speed);
 	}
 
 	@Override
 	void move(double elapsedTime) {
-	
+		myBadGuy.setY(myBadGuy.getY() + myVelocity.getY() * elapsedTime);
 		
 	}
 
@@ -54,6 +56,15 @@ public class BadGuy extends GameObject  {
 	void addGameObjectToGroup(Group root) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean isCollision(Rectangle projectile) {
+		if(projectile.intersects(myBadGuy.getBoundsInLocal())) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	
