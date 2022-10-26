@@ -1,15 +1,20 @@
+/**
+ * This class creates the ship controlled by the player and is reponsible for spawning projectiles from the ship
+ * 
+ * @author Chris YOung
+ * 
+ **/
+
 package gameObjects;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import javafx.event.EventHandler;
+import java.util.ArrayList;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Rectangle;
 
 public class PlayerShip extends GameObject {
 
@@ -17,8 +22,11 @@ public class PlayerShip extends GameObject {
 	private final int SHIP_SPEED = 20;
 	private final int SHIP_SIZE = 75;
 	private final int SCREEN_BUFFER = 75;
+	private final int PROJECTILE_BUFFER = 5;
 	private ImageView myPlayerShip;
 
+	// array list to hold projectiles
+	ArrayList<Projectile> myProjectiles = new ArrayList<Projectile>();
 
 	public PlayerShip(Image shipImage) {
 		super(shipImage);
@@ -64,8 +72,17 @@ public class PlayerShip extends GameObject {
 		else if (code == KeyCode.RIGHT) {
 			handleKeyInputRight();
 		}
-		else if (code == KeyCode.SPACE) {
+	}
+
+	public void handleProjectileSpawn(KeyCode code, Group root) {
+		if (code == KeyCode.SPACE) {
 			// create new projectile?
+			Projectile p = new Projectile(Projectile.setImage(), 
+					new Point2D(myPlayerShip.getLayoutX() + (SHIP_SIZE / 2) - PROJECTILE_BUFFER, 
+							myPlayerShip.getLayoutY()));
+			myProjectiles.add(p);
+			p.addGameObjectToGroup(root);
+
 		}
 	}
 
@@ -79,6 +96,10 @@ public class PlayerShip extends GameObject {
 		if (myPlayerShip.getLayoutX() < (Main.SCREEN_WIDTH - SCREEN_BUFFER)) {
 			myPlayerShip.setLayoutX(myPlayerShip.getLayoutX() + SHIP_SPEED);
 		}
+	}
+
+	public ArrayList<Projectile> getMyProjectiles() {
+		return myProjectiles;
 	}
 
 }

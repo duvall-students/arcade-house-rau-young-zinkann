@@ -1,12 +1,13 @@
 package gameObjects;
 
+import java.util.ArrayList;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -23,7 +24,6 @@ public class Main extends Application {
 
 	// ship
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
-	// collection of spawned projectiles
 
 	@Override
 	public void start(Stage stage) {
@@ -52,6 +52,7 @@ public class Main extends Application {
 			@Override
 			public void handle(KeyEvent event) {
 				ship.handleShipInputs(event.getCode());
+				ship.handleProjectileSpawn(event.getCode(), root);
 				event.consume();
 			}
 		});
@@ -61,7 +62,10 @@ public class Main extends Application {
 	}
 
 	private void step (double elapsedTime, Stage stage) {
-
+		ArrayList<Projectile> myProjectiles = ship.getMyProjectiles();
+		for (Projectile p : myProjectiles) {
+			p.move(elapsedTime);
+		}
 	}
 
 	public static void main(String[] args) {
