@@ -37,6 +37,10 @@ public abstract class GameObject {
 
 	}
 	
+	public GameObject(Image image) {
+		myView = new ImageView(image);
+	}
+	
 	protected int getRandomInRange (int min, int max) {
 		Random dice = new Random();
         return min + dice.nextInt(max - min) + 1;
