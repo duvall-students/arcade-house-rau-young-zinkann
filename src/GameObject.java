@@ -1,5 +1,3 @@
-package gameObjects;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -7,7 +5,6 @@ import java.util.Random;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,12 +21,12 @@ public abstract class GameObject {
 	
 	
 	// 
-	public GameObject(String imagePath, double width, double height, Point2D pos) throws FileNotFoundException {
+	public GameObject(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
         myView = new ImageView(image);
         
-        myView.setFitWidth(width);
-        myView.setFitHeight(height);
+        myView.setFitWidth(sizeWidth);
+        myView.setFitHeight(sizeHeight);
 
         myView.setX(pos.getX());
         myView.setY(pos.getY());
@@ -42,7 +39,7 @@ public abstract class GameObject {
     }
 
 	
-	public Node getView() {
+	Node getView() {
 		return myView;
 	}
 	
@@ -61,12 +58,7 @@ public abstract class GameObject {
 		return "GameObject [myView=" + myView + "]";
 	}
 
-	void move(double elapsedTime) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	void addGameObjectToGroup(Group root) {
+	void move() {
 		// TODO Auto-generated method stub
 		
 	}
