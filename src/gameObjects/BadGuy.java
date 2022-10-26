@@ -1,3 +1,4 @@
+package gameObjects;
 import java.util.ArrayList;
 
 import javafx.scene.Group;
@@ -24,7 +25,7 @@ public class BadGuy extends GameObject  {
 	}
 
 	@Override
-	void move() {
+	void move(double elapsedTime) {
 	
 		
 	}
@@ -42,6 +43,12 @@ public class BadGuy extends GameObject  {
 	
 	public void removeHealth() {
 		badGuyHealth -= 1;
+	}
+
+	@Override
+	void addGameObjectToGroup(Group root) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
