@@ -48,7 +48,7 @@ public class Main extends Application {
 		myScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				ship.handleShipMovement(event.getCode());
+				ship.handleShipInputs(event.getCode());
 				event.consume();
 			}
 		});

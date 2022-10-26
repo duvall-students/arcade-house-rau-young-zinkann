@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 
 public class PlayerShip extends GameObject {
 
@@ -55,12 +56,15 @@ public class PlayerShip extends GameObject {
 	}
 
 	// Handle ship movement left and right
-	public void handleShipMovement(KeyCode code) {
+	public void handleShipInputs(KeyCode code) {
 		if (code == KeyCode.LEFT) {
 			handleKeyInputLeft();
 		}
 		else if (code == KeyCode.RIGHT) {
 			handleKeyInputRight();
+		}
+		else if (code == KeyCode.SPACE) {
+			new Projectile(new Rectangle(), (int)myPlayerShip.getLayoutX(), (int)myPlayerShip.getLayoutY());
 		}
 	}
 
