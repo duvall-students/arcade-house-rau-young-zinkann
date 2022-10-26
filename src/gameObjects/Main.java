@@ -15,13 +15,17 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	public static final int SCREEN_WIDTH = 1000;
-	public static final int SCREEN_HEIGHT = 500;
+	public static final int SCREEN_HEIGHT = 700;
 	public static final Paint SCREEN_COLOR = Color.BLACK;
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
 	// ship
+	private Level currentLevel = new Level(4, 6, 1000, 2);
+	private Group myRoot;
+	
+	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
 	// collection of spawned projectiles
 
@@ -41,11 +45,12 @@ public class Main extends Application {
 
 
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) {
-		Group root = new Group();
-		Scene myScene = new Scene(root, sceneWidth, sceneHeight, background);
+		myRoot = new Group();
+		currentLevel.addEnemies(myRoot);
+		Scene myScene = new Scene(myRoot, sceneWidth, sceneHeight, background);
 
 		// add ship - Chris
-		ship.addGameObjectToGroup(root);
+		ship.addGameObjectToGroup(myRoot);
 		
 		// add key event handler to the scene - Chris
 		myScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -61,7 +66,13 @@ public class Main extends Application {
 	}
 
 	private void step (double elapsedTime, Stage stage) {
-
+		currentBadGuys = currentLevel.getBadGuys();
+		for(int i = 0; i < currentBadGuys.size(); i++) {
+			for(int j = 0; j < currentBadGuys.get(i).size(); j++) {
+				BadGuy currentBadGuy = currentBadGuys.get(i).get(j);
+				currentBadGuy.move(elapsedTime);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
