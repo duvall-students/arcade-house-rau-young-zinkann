@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 
 public class Projectile extends GameObject {
@@ -16,8 +15,8 @@ public class Projectile extends GameObject {
 	private Rectangle myProjectile;
 	private Point2D myVelocity;
 	
-	public Projectile(String imagePath, double width, double height, Point2D pos) throws FileNotFoundException {
-		super(imagePath,width,height,pos);
+	public Projectile(Point2D pos) {
+		super(pos);
 		myProjectile = new Rectangle();
 		myProjectile.setWidth(WIDTH);
 		myProjectile.setHeight(HEIGHT);
