@@ -45,6 +45,14 @@ public class BadGuy extends GameObject  {
 		badGuyHealth -= 1;
 	}
 	
+	public boolean collision(Rectangle projectile) {
+		if(projectile.intersects(myBadGuy.getBoundsInLocal())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 
 }
