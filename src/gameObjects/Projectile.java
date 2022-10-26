@@ -3,6 +3,7 @@ package gameObjects;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 
 public class Projectile extends GameObject {
