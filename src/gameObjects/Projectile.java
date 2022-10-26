@@ -1,6 +1,7 @@
 package gameObjects;
 
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.shape.Rectangle;
 
@@ -31,6 +32,13 @@ public class Projectile extends GameObject {
 	@Override
 	Node getView() {
 		return myProjectile;
+	}
+
+
+	@Override
+	void addGameObjectToGroup(Group root) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
