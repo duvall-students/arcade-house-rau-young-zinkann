@@ -12,3 +12,4 @@ Individual Contributions:
   Chris Young - PlayerShip.java
   Trevor Rau - Main.Java, BadGuy.Java
   Ben House - Projectile.java
+  Will Zinkann - GameObject, Level
