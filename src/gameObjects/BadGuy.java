@@ -1,6 +1,8 @@
 package gameObjects;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
@@ -8,20 +10,23 @@ import javafx.scene.shape.Rectangle;
 
 public class BadGuy extends GameObject  {
 	
-	private final int WIDTH = 50;
-	private final int HEIGHT = 25;
+	private final double WIDTH = 50;
+	private final double HEIGHT = 25;
 	private Rectangle myBadGuy;
 	private int badGuyHealth;
+	private String imagePath = "blahblah.gif";
 	
 	public ArrayList<ArrayList<BadGuy>> myBadGuys= new ArrayList<ArrayList<BadGuy>>();
 	
-	public BadGuy(Rectangle badGuy, int x, int y, int health, Paint breakerColor) {
-		myBadGuy = badGuy;
-		myBadGuy.setWidth(WIDTH);
-		myBadGuy.setWidth(HEIGHT);
-		myBadGuy.setX(x);
-		myBadGuy.setY(y);
-		badGuyHealth = health;
+	public BadGuy(String imagePath, double width, double height, Point2D pos) throws FileNotFoundException {
+		super(imagePath, width, height, pos);
+		//myBadGuy = badGuy;
+		myBadGuy.setWidth(width);
+		myBadGuy.setHeight(height);
+		
+//		myBadGuy.setX(x);
+//		myBadGuy.setY(y);
+//		badGuyHealth = health;
 	}
 
 	@Override
@@ -32,7 +37,7 @@ public class BadGuy extends GameObject  {
 
 	
 	@Override
-	Node getView() {
+	public Node getView() {
 		return myBadGuy;
 	}
 	
