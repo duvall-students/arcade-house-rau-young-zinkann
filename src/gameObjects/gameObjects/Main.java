@@ -1,5 +1,8 @@
 package gameObjects;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -30,7 +33,7 @@ public class Main extends Application {
 	// collection of spawned projectiles
 
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage) throws FileNotFoundException {
 		stage.setScene(CreateScene(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_COLOR));
 		stage.setTitle("Arcade");
 		stage.show();
@@ -44,7 +47,7 @@ public class Main extends Application {
 
 
 
-	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) {
+	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) throws FileNotFoundException {
 		myRoot = new Group();
 		currentLevel.addEnemies(myRoot);
 		Scene myScene = new Scene(myRoot, sceneWidth, sceneHeight, background);

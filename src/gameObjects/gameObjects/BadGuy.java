@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -12,18 +13,16 @@ public class BadGuy extends GameObject  {
 	
 	private final double WIDTH = 50;
 	private final double HEIGHT = 25;
-	private Rectangle myBadGuy;
 	private int badGuyHealth;
-	private String imagePath = "blahblah.gif";
 	private Point2D myVelocity;
+	private ImageView myBadGuy;
 	
 	public ArrayList<ArrayList<BadGuy>> myBadGuys= new ArrayList<ArrayList<BadGuy>>();
 	
-	public BadGuy(String imagePath, double width, double height, double speed, Point2D pos) throws FileNotFoundException {
+	public BadGuy(String imagePath, double speed, double width, double height, Point2D pos) throws FileNotFoundException {
 		super(imagePath, width, height, pos);
 		//myBadGuy = badGuy;
-		myBadGuy.setWidth(width);
-		myBadGuy.setHeight(height);
+		
 		
 //		myBadGuy.setX(x);
 //		myBadGuy.setY(y);

@@ -1,5 +1,8 @@
+package gameObjects;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,6 +13,8 @@ public class Level {
 	public final int STARTING_Y_VALUE = 0;
 	public final int Y_SPACE_VALUE = 35;
 	public final int X_SPACE_VALUE = 100;
+	private final double BADGUY_WIDTH = 50;
+	private final double BADGUY_HEIGHT = 25;
 	
 	private int numEnemies;
 	private int numRows;
@@ -17,6 +22,7 @@ public class Level {
 	private int badGuyHealth;
 	private ArrayList<ArrayList<BadGuy>> myBadGuys = new ArrayList<ArrayList<BadGuy>>();
 	private double badGuySpeed;
+	private String imagePath = "resources/badGuy.gif";
 	
 	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed) {
 		numEnemies = numRows * numEnemiesPerRow;
@@ -26,7 +32,7 @@ public class Level {
 		this.badGuySpeed = badGuySpeed;
 	}
 	
-	public void addEnemies(Group root) {
+	public void addEnemies(Group root) throws FileNotFoundException {
 		
 		int x = STARTING_X_VALUE;
 		int y = STARTING_Y_VALUE;
@@ -37,9 +43,10 @@ public class Level {
 			y += Y_SPACE_VALUE;
 			//loop through each row
 			for(int j = 0; j < numEnemiesPerRow; j++) {
-				Rectangle myRectangle = new Rectangle();
 				//create new bad guy
-				BadGuy myBadGuy = new BadGuy(myRectangle, x , y, badGuyHealth, badGuySpeed, Color.BLUE);
+				
+				Point2D currentPoint = new Point2D(x,y);
+				BadGuy myBadGuy = new BadGuy(imagePath, 10, BADGUY_WIDTH, BADGUY_HEIGHT, currentPoint);
 				//add to root 
 				root.getChildren().add(myBadGuy.getView());
 				//add to array
