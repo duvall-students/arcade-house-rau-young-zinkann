@@ -21,14 +21,13 @@ public class Projectile extends GameObject {
 
 	public Projectile(String projectileImage, double width, double height, Point2D pos) throws FileNotFoundException {
 		super(projectileImage, width, height,  pos);
-		myProjectile = new ImageView(projectileImage);
+		myProjectile = super.myView;
 		//myProjectile.setFitHeight(HEIGHT);
 		//myProjectile.setFitWidth(WIDTH);
 		//myProjectile.setLayoutX(pos.getX());
 		//myProjectile.setLayoutY(pos.getY());
 		myVelocity = new Point2D(-MOVE_SPEED, -MOVE_SPEED);
 	}
-
 
 	@Override
 	void move(double elapsedTime) {
@@ -56,6 +55,14 @@ public class Projectile extends GameObject {
 			System.out.println("File Not Found");
 		}
 		return image;
+	}
+	
+	public static String getImageURL(){
+		return "resources/galagamissile.png";
+	}
+	
+	public void removeProjectile(Group root) {
+		root.getChildren().remove(myProjectile);
 	}
 
 }

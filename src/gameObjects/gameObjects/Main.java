@@ -25,7 +25,7 @@ public class Main extends Application {
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
 	// ship
-	private Level currentLevel = new Level(4, 6, 1000, 2);
+	private Level currentLevel = new Level(4, 6, 0, 2);
 	private Group myRoot;
 	
 	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
@@ -60,6 +60,12 @@ public class Main extends Application {
 			@Override
 			public void handle(KeyEvent event) {
 				ship.handleShipInputs(event.getCode());
+				try {
+					ship.handleProjectileSpawn(event.getCode(), myRoot);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				event.consume();
 			}
 		});
@@ -68,12 +74,31 @@ public class Main extends Application {
 
 	}
 
-	private void step (double elapsedTime, Stage stage) {
+	private void step (double elapsedTime, Stage stage){
 		currentBadGuys = currentLevel.getBadGuys();
+		
+		ArrayList<Projectile> myProjectiles = ship.getMyProjectiles();
+		for (Projectile p : myProjectiles) {
+			p.move(elapsedTime);
+		}
 		for(int i = 0; i < currentBadGuys.size(); i++) {
 			for(int j = 0; j < currentBadGuys.get(i).size(); j++) {
 				BadGuy currentBadGuy = currentBadGuys.get(i).get(j);
 				currentBadGuy.move(elapsedTime);
+				for (Projectile p : myProjectiles) {
+					if(currentBadGuy.isIntersecting(p)) {
+						currentBadGuy.removeHealth();
+						p.removeProjectile(myRoot);
+						p.myView.disableProperty();
+						if(currentBadGuy.getHealth() == 0) {
+							currentBadGuy.breakerDied(myRoot);
+							currentBadGuys.get(i).remove(j);
+							
+						}
+					
+				
+					}
+				}
 			}
 		}
 	}

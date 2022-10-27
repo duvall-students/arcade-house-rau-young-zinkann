@@ -46,7 +46,7 @@ public class Level {
 				//create new bad guy
 				
 				Point2D currentPoint = new Point2D(x,y);
-				BadGuy myBadGuy = new BadGuy(imagePath, 10, BADGUY_WIDTH, BADGUY_HEIGHT, currentPoint);
+				BadGuy myBadGuy = new BadGuy(imagePath, 10, BADGUY_WIDTH, BADGUY_HEIGHT, 1, currentPoint);
 				//add to root 
 				root.getChildren().add(myBadGuy.getView());
 				//add to array

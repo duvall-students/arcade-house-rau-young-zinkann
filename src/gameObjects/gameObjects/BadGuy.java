@@ -17,30 +17,29 @@ public class BadGuy extends GameObject  {
 	private Point2D myVelocity;
 	private ImageView myBadGuy;
 	
-	public ArrayList<ArrayList<BadGuy>> myBadGuys= new ArrayList<ArrayList<BadGuy>>();
+	//public ArrayList<ArrayList<BadGuy>> myBadGuys= new ArrayList<ArrayList<BadGuy>>();
 	
-	public BadGuy(String imagePath, double speed, double width, double height, Point2D pos) throws FileNotFoundException {
+	public BadGuy(String imagePath, double speed, double width, double height, int health, Point2D pos) throws FileNotFoundException {
 		super(imagePath, width, height, pos);
-		//myBadGuy = badGuy;
+		myBadGuy = super.myView;
+		//myBadGuy = new ImageView(imagePath);
 		
 		
 //		myBadGuy.setX(x);
 //		myBadGuy.setY(y);
-//		badGuyHealth = health;
+		badGuyHealth = health;
 		myVelocity = new Point2D(speed, speed);
 	}
 
 	@Override
 	void move(double elapsedTime) {
 		myBadGuy.setY(myBadGuy.getY() + myVelocity.getY() * elapsedTime);
-		
 	}
 
-	
-	@Override
-	public Node getView() {
-		return myBadGuy;
+	public int getHealth() {
+		return badGuyHealth;
 	}
+	
 	
 	
 	public void breakerDied(Group root) {
