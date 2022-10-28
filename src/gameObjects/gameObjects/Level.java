@@ -62,4 +62,8 @@ public class Level {
 	public ArrayList getBadGuys() {
 		return myBadGuys;
 	}
+	
+	public void removeEnemy() {
+		numEnemies -= 1;
+	}
 }

@@ -1,18 +1,13 @@
 package gameObjects;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class BadGuy extends GameObject  {
 	
-	private final double WIDTH = 50;
-	private final double HEIGHT = 25;
 	private int badGuyHealth;
 	private Point2D myVelocity;
 	private ImageView myBadGuy;
@@ -22,11 +17,6 @@ public class BadGuy extends GameObject  {
 	public BadGuy(String imagePath, double speed, double width, double height, int health, Point2D pos) throws FileNotFoundException {
 		super(imagePath, width, height, pos);
 		myBadGuy = super.myView;
-		//myBadGuy = new ImageView(imagePath);
-		
-		
-//		myBadGuy.setX(x);
-//		myBadGuy.setY(y);
 		badGuyHealth = health;
 		myVelocity = new Point2D(speed, speed);
 	}

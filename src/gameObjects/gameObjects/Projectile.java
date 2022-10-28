@@ -12,9 +12,7 @@ import javafx.scene.image.ImageView;
 
 public class Projectile extends GameObject {
 
-	private final static String PROJECTILE_IMAGE = "resources/galagamissile.png";
-	private final int WIDTH = 10;
-	private final int HEIGHT = 25;
+	private final static String PROJECTILE_IMAGE = "resources/galagamissile.png";;
 	public final int MOVE_SPEED = 50;
 	private ImageView myProjectile;
 	private Point2D myVelocity;
@@ -22,10 +20,6 @@ public class Projectile extends GameObject {
 	public Projectile(String projectileImage, double width, double height, Point2D pos) throws FileNotFoundException {
 		super(projectileImage, width, height,  pos);
 		myProjectile = super.myView;
-		//myProjectile.setFitHeight(HEIGHT);
-		//myProjectile.setFitWidth(WIDTH);
-		//myProjectile.setLayoutX(pos.getX());
-		//myProjectile.setLayoutY(pos.getY());
 		myVelocity = new Point2D(-MOVE_SPEED, -MOVE_SPEED);
 	}
 

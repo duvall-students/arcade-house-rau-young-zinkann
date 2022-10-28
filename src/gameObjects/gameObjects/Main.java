@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -30,6 +31,7 @@ public class Main extends Application {
 	
 	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
+	private Rectangle bottomBorder;
 	// collection of spawned projectiles
 
 	@Override
@@ -50,6 +52,12 @@ public class Main extends Application {
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) throws FileNotFoundException {
 		myRoot = new Group();
 		currentLevel.addEnemies(myRoot);
+		
+		
+		bottomBorder = new Rectangle(sceneWidth, 5, background);
+		bottomBorder.setY(sceneHeight - 5);
+		myRoot.getChildren().add(bottomBorder);
+		
 		Scene myScene = new Scene(myRoot, sceneWidth, sceneHeight, background);
 
 		// add ship - Chris
@@ -76,20 +84,33 @@ public class Main extends Application {
 
 	private void step (double elapsedTime, Stage stage){
 		currentBadGuys = currentLevel.getBadGuys();
-		
+		//projectile movement
 		ArrayList<Projectile> myProjectiles = ship.getMyProjectiles();
 		for (Projectile p : myProjectiles) {
 			p.move(elapsedTime);
 		}
+		//bad guy movements - Trevor
 		for(int i = 0; i < currentBadGuys.size(); i++) {
 			for(int j = 0; j < currentBadGuys.get(i).size(); j++) {
 				BadGuy currentBadGuy = currentBadGuys.get(i).get(j);
 				currentBadGuy.move(elapsedTime);
-				for (Projectile p : myProjectiles) {
-					if(currentBadGuy.isIntersecting(p)) {
+				
+				//bottom border intersection -Trevor 
+				if(currentBadGuy.isCollision(bottomBorder)) {
+					System.out.println("Damage caused");
+					currentBadGuy.breakerDied(myRoot);
+					currentBadGuys.get(i).remove(j); 
+				}
+				//projectile logic - Trevor
+				for (int x = 0; x < myProjectiles.size(); x++) {
+					Projectile currentProjectile = myProjectiles.get(x);
+					if(currentBadGuy.isIntersecting(currentProjectile)) {
 						currentBadGuy.removeHealth();
-						p.removeProjectile(myRoot);
-						p.myView.disableProperty();
+						currentProjectile.removeProjectile(myRoot);
+						myProjectiles.remove(x);
+						//myProjectiles.remove(p);
+						
+						//remove breaker if dead - Trevor
 						if(currentBadGuy.getHealth() == 0) {
 							currentBadGuy.breakerDied(myRoot);
 							currentBadGuys.get(i).remove(j);
@@ -100,7 +121,7 @@ public class Main extends Application {
 					}
 				}
 			}
-		}
+		}	
 	}
 
 	public static void main(String[] args) {
