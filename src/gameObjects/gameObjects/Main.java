@@ -33,6 +33,8 @@ public class Main extends Application {
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
 	private Rectangle bottomBorder;
 	// collection of spawned projectiles
+	private int currentScore = 0;
+	PointsText scoreText;
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
@@ -53,7 +55,9 @@ public class Main extends Application {
 		myRoot = new Group();
 		currentLevel.addEnemies(myRoot);
 		
-		
+		scoreText = new PointsText("Score: 0", 10, 20, Color.WHITE);
+		scoreText.addToScene(myRoot);
+		//add bottom border
 		bottomBorder = new Rectangle(sceneWidth, 5, background);
 		bottomBorder.setY(sceneHeight - 5);
 		myRoot.getChildren().add(bottomBorder);
@@ -108,6 +112,9 @@ public class Main extends Application {
 						currentBadGuy.removeHealth();
 						currentProjectile.removeProjectile(myRoot);
 						myProjectiles.remove(x);
+						currentScore += 1;
+						scoreText.Update(currentScore);
+						
 						//myProjectiles.remove(p);
 						
 						//remove breaker if dead - Trevor
