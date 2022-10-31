@@ -27,9 +27,10 @@ public class Main extends Application {
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
 
-	private Level currentLevel = new Level(4, 6, 0, 2);
+	private Level currentLevel;
 	private Group myRoot;
 	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
+	public ArrayList<Level> myLevelArray = new ArrayList<Level>();
 	// ship
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
 	private Rectangle bottomBorder;
@@ -40,6 +41,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
+		populateLevelArray(myLevelArray);
 		stage.setScene(CreateScene(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_COLOR));
 		stage.setTitle("Arcade");
 		stage.show();
@@ -55,6 +57,8 @@ public class Main extends Application {
 
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) throws FileNotFoundException {
 		myRoot = new Group();
+		currentLevel = myLevelArray.get(0);
+		currentLevel.addEnemies(myRoot);
 		currentLevel.addEnemies(myRoot);
 
 		//add
@@ -150,6 +154,15 @@ public class Main extends Application {
 //		}
 		
 		// need to iterate through levels or game over screen
+	}
+	
+	private void populateLevelArray(ArrayList<Level> levelArray) {
+		System.out.println("hi");
+		Level level1 = new Level(4, 6, 0, 2);
+		levelArray.add(level1);
+		System.out.println(levelArray.size()); 
+	
+		
 	}
 
 	public static void main(String[] args) {
