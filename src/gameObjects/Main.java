@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application {
+
 	public static final int SCREEN_WIDTH = 1000;
 	public static final int SCREEN_HEIGHT = 700;
 	public static final Paint SCREEN_COLOR = Color.BLACK;
@@ -25,11 +26,11 @@ public class Main extends Application {
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
-	// ship
+
 	private Level currentLevel = new Level(4, 6, 0, 2);
 	private Group myRoot;
-	
 	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
+	// ship
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
 	private Rectangle bottomBorder;
 	// collection of spawned projectiles
@@ -55,25 +56,25 @@ public class Main extends Application {
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) throws FileNotFoundException {
 		myRoot = new Group();
 		currentLevel.addEnemies(myRoot);
-		
+
 		//add
 		scoreText = new TextUI("Score: ", 10, 20, Color.WHITE, 0);
 		scoreText.addToScene(myRoot);
-		
+
 		//add life text
 		lifeText = new TextUI("Lives Remaining: ", 10, 40, Color.WHITE, 3);
 		lifeText.addToScene(myRoot);
-		
+
 		//add bottom border
 		bottomBorder = new Rectangle(sceneWidth, 5, background);
 		bottomBorder.setY(sceneHeight - 5);
 		myRoot.getChildren().add(bottomBorder);
-		
+
 		Scene myScene = new Scene(myRoot, sceneWidth, sceneHeight, background);
 
 		// add ship - Chris
 		ship.addGameObjectToGroup(myRoot);
-		
+
 		// add key event handler to the scene - Chris
 		myScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -93,9 +94,9 @@ public class Main extends Application {
 
 	}
 
-	private void step (double elapsedTime, Stage stage){
+	private void step (double elapsedTime, Stage stage) {
 		currentBadGuys = currentLevel.getBadGuys();
-		//projectile movement
+		//projectile movement - Chris
 		ArrayList<Projectile> myProjectiles = ship.getMyProjectiles();
 		for (Projectile p : myProjectiles) {
 			p.move(elapsedTime);
@@ -105,7 +106,7 @@ public class Main extends Application {
 			for(int j = 0; j < currentBadGuys.get(i).size(); j++) {
 				BadGuy currentBadGuy = currentBadGuys.get(i).get(j);
 				currentBadGuy.move(elapsedTime);
-				
+
 				//bottom border intersection -Trevor 
 				if(currentBadGuy.isCollision(bottomBorder)) {
 					System.out.println("Damage caused");
@@ -121,21 +122,34 @@ public class Main extends Application {
 						myProjectiles.remove(x);
 						currentScore += 1;
 						scoreText.Update(currentScore);
-						
+
 						//myProjectiles.remove(p);
-						
+
 						//remove breaker if dead - Trevor
 						if(currentBadGuy.getHealth() == 0) {
 							currentBadGuy.breakerDied(myRoot);
 							currentBadGuys.get(i).remove(j);
-							
+							currentLevel.removeEnemy();
 						}
-					
-				
+
+
 					}
 				}
 			}
-		}	
+		}
+		// check for no more bad guys - Chris
+		checkNoMoreBadGuys(currentLevel);
+	}
+
+	private void checkNoMoreBadGuys(Level currentLevel) {
+//		// debug printouts
+//		if (currentLevel.getNumEnemies() == 0) {
+//			System.out.println("level over");
+//		} else {
+//			System.out.println(currentLevel.getNumEnemies());
+//		}
+		
+		// need to iterate through levels or game over screen
 	}
 
 	public static void main(String[] args) {
