@@ -34,7 +34,8 @@ public class Main extends Application {
 	private Rectangle bottomBorder;
 	// collection of spawned projectiles
 	private int currentScore = 0;
-	PointsText scoreText;
+	private TextUI scoreText;
+	private TextUI lifeText;
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
@@ -55,8 +56,14 @@ public class Main extends Application {
 		myRoot = new Group();
 		currentLevel.addEnemies(myRoot);
 		
-		scoreText = new PointsText("Score: 0", 10, 20, Color.WHITE);
+		//add
+		scoreText = new TextUI("Score: ", 10, 20, Color.WHITE, 0);
 		scoreText.addToScene(myRoot);
+		
+		//add life text
+		lifeText = new TextUI("Lives Remaining: ", 10, 40, Color.WHITE, 3);
+		lifeText.addToScene(myRoot);
+		
 		//add bottom border
 		bottomBorder = new Rectangle(sceneWidth, 5, background);
 		bottomBorder.setY(sceneHeight - 5);
