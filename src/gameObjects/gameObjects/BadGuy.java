@@ -55,6 +55,8 @@ public class BadGuy extends GameObject  {
 		}
 	}
 	
+
+	
 	
 
 }

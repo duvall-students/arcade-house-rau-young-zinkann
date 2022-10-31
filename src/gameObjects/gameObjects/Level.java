@@ -20,16 +20,19 @@ public class Level {
 	private int numRows;
 	private int numEnemiesPerRow;
 	private int badGuyHealth;
+	public int shipLives;
 	private ArrayList<ArrayList<BadGuy>> myBadGuys = new ArrayList<ArrayList<BadGuy>>();
 	private double badGuySpeed;
 	private String imagePath = "resources/badGuy.gif";
 	
-	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed) {
+	//added shipLives to constructor for levels -Ben
+	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed,int shipLives) {
 		numEnemies = numRows * numEnemiesPerRow;
 		this.numRows = numRows;
 		this.numEnemiesPerRow = numEnemiesPerRow;
 		this.badGuyHealth = badGuyHealth;
 		this.badGuySpeed = badGuySpeed;
+		this.shipLives = shipLives;
 	}
 	
 	public void addEnemies(Group root) throws FileNotFoundException {
@@ -65,5 +68,10 @@ public class Level {
 	
 	public void removeEnemy() {
 		numEnemies -= 1;
+	}
+	
+	// added remove life to keep in level logic - Ben
+	public void removeLife() {
+		shipLives -= 1;
 	}
 }

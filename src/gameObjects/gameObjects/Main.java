@@ -3,6 +3,8 @@ package gameObjects;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import ScorecardUI.ImageUI;
+import ScorecardUI.TextUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -26,7 +28,7 @@ public class Main extends Application {
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
 	// ship
-	private Level currentLevel = new Level(4, 6, 0, 2);
+	private Level currentLevel = new Level(4, 6, 0, 2,3);
 	private Group myRoot;
 	
 	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
@@ -35,7 +37,7 @@ public class Main extends Application {
 	// collection of spawned projectiles
 	private int currentScore = 0;
 	private TextUI scoreText;
-	private TextUI lifeText;
+	private ImageUI lifeText;
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
@@ -61,8 +63,8 @@ public class Main extends Application {
 		scoreText.addToScene(myRoot);
 		
 		//add life text
-		lifeText = new TextUI("Lives Remaining: ", 10, 40, Color.WHITE, 3);
-		lifeText.addToScene(myRoot);
+		lifeText = new ImageUI(myRoot, currentLevel.shipLives);
+		
 		
 		//add bottom border
 		bottomBorder = new Rectangle(sceneWidth, 5, background);
@@ -108,7 +110,9 @@ public class Main extends Application {
 				
 				//bottom border intersection -Trevor 
 				if(currentBadGuy.isCollision(bottomBorder)) {
-					System.out.println("Damage caused");
+					//added life score updating - Ben
+					currentLevel.removeLife();
+					lifeText.Update(myRoot,currentLevel.shipLives);
 					currentBadGuy.breakerDied(myRoot);
 					currentBadGuys.get(i).remove(j); 
 				}
@@ -121,7 +125,6 @@ public class Main extends Application {
 						myProjectiles.remove(x);
 						currentScore += 1;
 						scoreText.Update(currentScore);
-						
 						//myProjectiles.remove(p);
 						
 						//remove breaker if dead - Trevor

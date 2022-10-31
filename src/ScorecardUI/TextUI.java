@@ -1,14 +1,15 @@
-package gameObjects;
+package ScorecardUI;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-public class TextUI {
+public class TextUI{
 
 	private Text myText;
 	public String mainBody;
+	public Point2D location;
 	
 	
 	public TextUI(String content, double x, double y, Paint textColor, int initialValue) {
@@ -33,6 +34,8 @@ public class TextUI {
 	public void addToScene(Group root) {
 		root.getChildren().add(myText);
 	}
+
+
 	
 	
 	
