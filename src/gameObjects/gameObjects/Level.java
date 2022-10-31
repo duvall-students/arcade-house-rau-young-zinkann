@@ -66,6 +66,16 @@ public class Level {
 		return myBadGuys;
 	}
 	
+
+
+	public int getNumEnemies() {
+		return numEnemies;
+	}
+
+	public void setNumEnemies(int numEnemies) {
+		this.numEnemies = numEnemies;
+	}
+	
 	public void removeEnemy() {
 		numEnemies -= 1;
 	}

@@ -131,6 +131,7 @@ public class Main extends Application {
 						if(currentBadGuy.getHealth() == 0) {
 							currentBadGuy.breakerDied(myRoot);
 							currentBadGuys.get(i).remove(j);
+							currentLevel.removeEnemy();
 							
 						}
 					
@@ -139,6 +140,20 @@ public class Main extends Application {
 				}
 			}
 		}	
+	
+	// check for no more bad guys - Chris
+	checkNoMoreBadGuys(currentLevel);
+}
+
+private void checkNoMoreBadGuys(Level currentLevel) {
+//	// debug printouts
+//	if (currentLevel.getNumEnemies() == 0) {
+//		System.out.println("level over");
+//	} else {
+//		System.out.println(currentLevel.getNumEnemies());
+//	}
+
+	// need to iterate through levels or game over screen	
 	}
 
 	public static void main(String[] args) {
