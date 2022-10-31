@@ -40,8 +40,10 @@ public abstract class GameObject {
 		myView = new ImageView(image);
 	}
 	
-	public GameObject(Point2D pos) {
-		
+	public GameObject(Image image, Point2D pos) {
+		myView = new ImageView(image);
+		myView.setX(pos.getX());
+        myView.setY(pos.getY());
 	}
 	
 	protected int getRandomInRange (int min, int max) {
@@ -76,12 +78,7 @@ public abstract class GameObject {
 
 	void addGameObjectToGroup(Group root) {
 		// TODO Auto-generated method stub
-		
+	
 	}
-
-
-
-
-
 
 }
