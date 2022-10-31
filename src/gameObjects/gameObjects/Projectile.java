@@ -1,5 +1,6 @@
 package gameObjects;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -11,23 +12,16 @@ import javafx.scene.image.ImageView;
 
 public class Projectile extends GameObject {
 
-	private final static String PROJECTILE_IMAGE = "resources/galagamissile.png";
-	private final int WIDTH = 10;
-	private final int HEIGHT = 25;
+	private final static String PROJECTILE_IMAGE = "resources/galagamissile.png";;
 	public final int MOVE_SPEED = 50;
 	private ImageView myProjectile;
 	private Point2D myVelocity;
 
-	public Projectile(Image projectileImage, Point2D pos) {
-		super(projectileImage, pos);
-		myProjectile = new ImageView(projectileImage);
-		myProjectile.setFitHeight(HEIGHT);
-		myProjectile.setFitWidth(WIDTH);
-		myProjectile.setLayoutX(pos.getX());
-		myProjectile.setLayoutY(pos.getY());
+	public Projectile(String projectileImage, double width, double height, Point2D pos) throws FileNotFoundException {
+		super(projectileImage, width, height,  pos);
+		myProjectile = super.myView;
 		myVelocity = new Point2D(-MOVE_SPEED, -MOVE_SPEED);
 	}
-
 
 	@Override
 	void move(double elapsedTime) {
@@ -55,6 +49,14 @@ public class Projectile extends GameObject {
 			System.out.println("File Not Found");
 		}
 		return image;
+	}
+	
+	public static String getImageURL(){
+		return "resources/galagamissile.png";
+	}
+	
+	public void removeProjectile(Group root) {
+		root.getChildren().remove(myProjectile);
 	}
 
 }

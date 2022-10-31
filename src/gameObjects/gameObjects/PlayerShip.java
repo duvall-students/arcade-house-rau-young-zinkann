@@ -1,11 +1,5 @@
-/**
- * This class creates the ship controlled by the player and is reponsible for spawning projectiles from the ship
- * 
- * @author Chris YOung
- * 
- **/
-
 package gameObjects;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -24,6 +18,9 @@ public class PlayerShip extends GameObject {
 	private final int SCREEN_BUFFER = 75;
 	private final int PROJECTILE_BUFFER = 5;
 	private ImageView myPlayerShip;
+	
+	private final int PROJECTILE_WIDTH = 10;
+	private final int PROJECTILE_HEIGHT = 25;
 
 	// array list to hold projectiles
 	ArrayList<Projectile> myProjectiles = new ArrayList<Projectile>();
@@ -74,10 +71,10 @@ public class PlayerShip extends GameObject {
 		}
 	}
 
-	public void handleProjectileSpawn(KeyCode code, Group root) {
+	public void handleProjectileSpawn(KeyCode code, Group root) throws FileNotFoundException {
 		if (code == KeyCode.SPACE) {
 			// create new projectile?
-			Projectile p = new Projectile(Projectile.setImage(), 
+			Projectile p = new Projectile("resources/galagamissile.png", PROJECTILE_WIDTH, PROJECTILE_HEIGHT, 
 					new Point2D(myPlayerShip.getLayoutX() + (SHIP_SIZE / 2) - PROJECTILE_BUFFER, 
 							myPlayerShip.getLayoutY()));
 			myProjectiles.add(p);
