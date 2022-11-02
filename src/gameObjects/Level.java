@@ -29,7 +29,7 @@ public class Level {
 	private String imagePath1 = "resources/badGuy.gif";
 	private String imagePath2 = "resources/galageEnemy2.png";
 	private String imagePath3 = "resources/galagaEnemy3.gif";
-	private int numLives;
+	public int numLives;
 	private int imageNum;
 	
 	public Level(int imageNum, int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed, int numLives) {

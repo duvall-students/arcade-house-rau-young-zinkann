@@ -19,6 +19,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import scorecardUI.ImageUI;
+import scorecardUI.TextUI;
 
 public class Main extends Application {
 
@@ -44,7 +46,7 @@ public class Main extends Application {
 	// collection of spawned projectiles
 	private int currentScore = 0;
 	private TextUI scoreText;
-	private TextUI lifeText;
+	private ImageUI lifeText;
 	private GameOverScreen myEndGameScreen;
 
 	@Override
@@ -80,8 +82,8 @@ public class Main extends Application {
 		scoreText.addToScene(myRoot);
 
 		//add life text
-		lifeText = new TextUI("Lives Remaining: ", 10, 40, Color.WHITE, 3);
-		lifeText.addToScene(myRoot);
+		lifeText = new ImageUI(myRoot, currentLevel.numLives);
+	
 
 		//add bottom border
 		bottomBorder = new Rectangle(sceneWidth, 5, background);
@@ -149,8 +151,9 @@ public class Main extends Application {
 
 				//bottom border intersection -Trevor 
 				if(currentBadGuy.isCollision(bottomBorder)) {
-					System.out.println("Damage caused");
+					//added life score updating - Ben
 					currentLevel.removeLife();
+					lifeText.Update(myRoot,currentLevel.numLives);
 					currentBadGuy.breakerDied(myRoot);
 					currentBadGuys.get(i).remove(j); 
 				}
