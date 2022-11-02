@@ -1,4 +1,4 @@
-package gameObjects;
+package scorecardUI;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
