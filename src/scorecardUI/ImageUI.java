@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ImageUI{
-	
+
 	public final int STARTING_X_VALUE = 0;
 	public final int STARTING_Y_VALUE = 20;
 	public final int X_SPACE_VALUE = 40;
@@ -20,28 +20,24 @@ public class ImageUI{
 
 
 	public ArrayList<PlayerShipLives> myLives = new ArrayList<PlayerShipLives>();
-
+	
+	//adds a lives bar of PlayerShipLives
 	public ImageUI(Group root, int lives) throws FileNotFoundException{
 		int x = STARTING_X_VALUE;
 		int y = STARTING_Y_VALUE;
 		for(int i = 0; i < lives; i++) {
 			PlayerShipLives myLife = new PlayerShipLives(x,y);
 			root.getChildren().add(myLife.getView());
-			
+
 			myLives.add(myLife);
 			x += X_SPACE_VALUE;
 		}
-		
-
-		
 	}
 
-
+	//updates number of lives 
 	public void Update(Group root, int lives) {
 		PlayerShipLives myLife = myLives.get(lives);
 		myLife.liveLost(root);
-		
-		
 	}
 
 }
