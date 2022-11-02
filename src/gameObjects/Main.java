@@ -14,6 +14,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,10 +28,15 @@ public class Main extends Application {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+	
+	private int numLives = 3;
+	
+	private int currentLevelNum = 0;
 
 
-	private Level currentLevel = new Level(4, 6, 0, 2);
+	private Level currentLevel;
 	private Group myRoot;
+	public ArrayList<Level> myLevelArray = new ArrayList<Level>();
 	private ArrayList<ArrayList<BadGuy>> currentBadGuys;
 	// ship
 	public PlayerShip ship = new PlayerShip(PlayerShip.setImage());
@@ -37,14 +45,23 @@ public class Main extends Application {
 	private int currentScore = 0;
 	private TextUI scoreText;
 	private TextUI lifeText;
+	private GameOverScreen myEndGameScreen;
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
+		populateLevelArray(myLevelArray);
 		stage.setScene(CreateScene(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_COLOR));
 		stage.setTitle("Arcade");
 		stage.show();
 
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY, stage));
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> {
+			try {
+				step(SECOND_DELAY, stage);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -55,6 +72,7 @@ public class Main extends Application {
 
 	private Scene CreateScene(int sceneWidth, int sceneHeight, Paint background) throws FileNotFoundException {
 		myRoot = new Group();
+		currentLevel = myLevelArray.get(currentLevelNum);
 		currentLevel.addEnemies(myRoot);
 
 		//add
@@ -94,10 +112,32 @@ public class Main extends Application {
 
 	}
 
-	private void step (double elapsedTime, Stage stage) {
+	private void step (double elapsedTime, Stage stage) throws FileNotFoundException {
+		
+		if(currentLevel.isGameOver()) {
+			myEndGameScreen = new GameOverScreen(1);
+			myEndGameScreen.addToScreen(myRoot);
+			return;
+		}
+		
 		currentBadGuys = currentLevel.getBadGuys();
 		//projectile movement - Chris
 		ArrayList<Projectile> myProjectiles = ship.getMyProjectiles();
+		System.out.println(currentLevelNum);
+		
+		if(currentLevel.isLevelBeat()) {
+			currentLevelNum += 1;
+			if(currentLevelNum >= myLevelArray.size()) {
+				System.out.println("Game Beat");
+				myEndGameScreen = new GameOverScreen(2);
+				myEndGameScreen.addToScreen(myRoot);
+				return;
+			}
+			else {
+			currentLevel = myLevelArray.get(currentLevelNum);
+			currentLevel.addEnemies(myRoot);
+			}
+		}
 		for (Projectile p : myProjectiles) {
 			p.move(elapsedTime);
 		}
@@ -110,6 +150,7 @@ public class Main extends Application {
 				//bottom border intersection -Trevor 
 				if(currentBadGuy.isCollision(bottomBorder)) {
 					System.out.println("Damage caused");
+					currentLevel.removeLife();
 					currentBadGuy.breakerDied(myRoot);
 					currentBadGuys.get(i).remove(j); 
 				}
@@ -117,6 +158,7 @@ public class Main extends Application {
 				for (int x = 0; x < myProjectiles.size(); x++) {
 					Projectile currentProjectile = myProjectiles.get(x);
 					if(currentBadGuy.isIntersecting(currentProjectile)) {
+						//System.out.println(currentBadGuy.getHealth());
 						currentBadGuy.removeHealth();
 						currentProjectile.removeProjectile(myRoot);
 						myProjectiles.remove(x);
@@ -125,7 +167,7 @@ public class Main extends Application {
 
 						//myProjectiles.remove(p);
 
-						//remove breaker if dead - Trevor
+						//remove badGuy if dead - Trevor
 						if(currentBadGuy.getHealth() == 0) {
 							currentBadGuy.breakerDied(myRoot);
 							currentBadGuys.get(i).remove(j);
@@ -151,10 +193,21 @@ public class Main extends Application {
 		
 		// need to iterate through levels or game over screen
 	}
+	
+	private void populateLevelArray(ArrayList<Level> levelArray) {
+		Level level1 = new Level(1, 4, 6, 1, 1, numLives);
+		levelArray.add(level1);
+		Level level2 = new Level(2, 5, 6, 2, 1, numLives);
+		levelArray.add(level2);
+		Level level3 = new Level(3, 5, 8, 2, 1, numLives);
+		levelArray.add(level3);
+	}
 
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
+	
+	
 
 
 }
