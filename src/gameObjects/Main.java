@@ -25,6 +25,7 @@ public class Main extends Application {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+	public static final int NUM_LIVES = 3;
 
 
 	private Level currentLevel;
@@ -99,6 +100,7 @@ public class Main extends Application {
 	}
 
 	private void step (double elapsedTime, Stage stage) {
+		if(!currentLevel.isGameOver()) {
 		currentBadGuys = currentLevel.getBadGuys();
 		//projectile movement - Chris
 		ArrayList<Projectile> myProjectiles = ship.getMyProjectiles();
@@ -142,6 +144,11 @@ public class Main extends Application {
 			}
 		}
 		// check for no more bad guys - Chris
+		}
+		else {
+			//game over screen
+			return;
+		}
 		checkNoMoreBadGuys(currentLevel);
 	}
 
@@ -157,12 +164,8 @@ public class Main extends Application {
 	}
 	
 	private void populateLevelArray(ArrayList<Level> levelArray) {
-		System.out.println("hi");
-		Level level1 = new Level(4, 6, 0, 2);
+		Level level1 = new Level(4, 6, 0, 2, NUM_LIVES);
 		levelArray.add(level1);
-		System.out.println(levelArray.size()); 
-	
-		
 	}
 
 	public static void main(String[] args) {
