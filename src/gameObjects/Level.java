@@ -1,6 +1,7 @@
 package gameObjects;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -22,11 +23,19 @@ public class Level {
 	private int badGuyHealth;
 	private ArrayList<ArrayList<BadGuy>> myBadGuys = new ArrayList<ArrayList<BadGuy>>();
 	private double badGuySpeed;
-	private String imagePath = "resources/badGuy.gif";
-	private int numLives;
 	
-	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed, int numLives) {
+	
+	private HashMap<Integer,String> imageMap = new HashMap<Integer, String>();
+	private String imagePath1 = "resources/badGuy.gif";
+	private String imagePath2 = "resources/galageEnemy2.png";
+	private String imagePath3 = "resources/galagaEnemy3.gif";
+	private int numLives;
+	private int imageNum;
+	
+	public Level(int imageNum, int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed, int numLives) {
+		populateImageMap();
 		numEnemies = numRows * numEnemiesPerRow;
+		this.imageNum = imageNum;
 		this.numRows = numRows;
 		this.numEnemiesPerRow = numEnemiesPerRow;
 		this.badGuyHealth = badGuyHealth;
@@ -48,7 +57,7 @@ public class Level {
 				//create new bad guy
 				
 				Point2D currentPoint = new Point2D(x,y);
-				BadGuy myBadGuy = new BadGuy(imagePath, 10, BADGUY_WIDTH, BADGUY_HEIGHT, badGuyHealth, currentPoint);
+				BadGuy myBadGuy = new BadGuy(imageMap.get(imageNum), 10, BADGUY_WIDTH, BADGUY_HEIGHT, badGuyHealth, currentPoint);
 				//add to root 
 				root.getChildren().add(myBadGuy.getView());
 				//add to array
@@ -58,6 +67,14 @@ public class Level {
 			}
 			myBadGuys.add(myBadGuysRow);
 		}
+	}
+	
+	//trevor
+	public void populateImageMap() {
+		imageMap.put(1, imagePath1);
+		imageMap.put(2, imagePath2);
+		imageMap.put(3, imagePath3);
+		
 	}
 	
 	
@@ -82,6 +99,7 @@ public class Level {
 		numLives -= 1;
 	}
 	
+	//trevor
 	public boolean isLevelBeat() {
 		if(numEnemies == 0) {
 			return true;
@@ -92,6 +110,7 @@ public class Level {
 		
 	}
 	
+	//trevor
 	public boolean isGameOver() {
 		if(numLives == 0) {
 			return true;

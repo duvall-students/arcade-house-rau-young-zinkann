@@ -14,6 +14,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -42,6 +45,7 @@ public class Main extends Application {
 	private int currentScore = 0;
 	private TextUI scoreText;
 	private TextUI lifeText;
+	private GameOverScreen myEndGameScreen;
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
@@ -111,6 +115,8 @@ public class Main extends Application {
 	private void step (double elapsedTime, Stage stage) throws FileNotFoundException {
 		
 		if(currentLevel.isGameOver()) {
+			myEndGameScreen = new GameOverScreen(1);
+			myEndGameScreen.addToScreen(myRoot);
 			return;
 		}
 		
@@ -123,6 +129,8 @@ public class Main extends Application {
 			currentLevelNum += 1;
 			if(currentLevelNum >= myLevelArray.size()) {
 				System.out.println("Game Beat");
+				myEndGameScreen = new GameOverScreen(2);
+				myEndGameScreen.addToScreen(myRoot);
 				return;
 			}
 			else {
@@ -187,15 +195,19 @@ public class Main extends Application {
 	}
 	
 	private void populateLevelArray(ArrayList<Level> levelArray) {
-		Level level1 = new Level(4, 6, 1, 1, numLives);
+		Level level1 = new Level(1, 4, 6, 1, 1, numLives);
 		levelArray.add(level1);
-		Level level2 = new Level(4, 6, 1, 1, numLives);
+		Level level2 = new Level(2, 5, 6, 2, 1, numLives);
 		levelArray.add(level2);
+		Level level3 = new Level(3, 5, 8, 2, 1, numLives);
+		levelArray.add(level3);
 	}
 
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
+	
+	
 
 
 }
