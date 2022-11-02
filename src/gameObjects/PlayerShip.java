@@ -1,3 +1,10 @@
+/**
+ * 	@author Chris Young
+ * 	@description This class creates the ship that is controlled by the player with
+ * 				 the left and right arrow keys and spawns projectiles when space is
+ * 				 pressed
+ */
+
 package gameObjects;
 
 import java.io.FileInputStream;
@@ -36,12 +43,10 @@ public class PlayerShip extends GameObject {
 
 	@Override
 	public Node getView() {
-		// TODO Auto-generated method stub
 		return myPlayerShip;
 	}
 
 	public void addGameObjectToGroup(Group root) {
-		// TODO Auto-generated method stub
 		root.getChildren().add(myPlayerShip);
 	}
 
@@ -57,7 +62,6 @@ public class PlayerShip extends GameObject {
 
 	@Override
 	void move(double elapsedTime) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -73,7 +77,7 @@ public class PlayerShip extends GameObject {
 
 	public void handleProjectileSpawn(KeyCode code, Group root) throws FileNotFoundException {
 		if (code == KeyCode.SPACE) {
-			// create new projectile?
+			// create new projectile
 			Projectile p = new Projectile("resources/galagamissile.png", PROJECTILE_WIDTH, PROJECTILE_HEIGHT, 
 					new Point2D(myPlayerShip.getLayoutX() + (SHIP_SIZE / 2) - PROJECTILE_BUFFER, 
 							myPlayerShip.getLayoutY()));
