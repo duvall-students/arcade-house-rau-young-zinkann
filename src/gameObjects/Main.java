@@ -9,14 +9,10 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -30,10 +26,7 @@ public class Main extends Application {
 	public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	
 	private int numLives = 3;
-	
 	private int currentLevelNum = 0;
-
-
 	private Level currentLevel;
 	private Group myRoot;
 	public ArrayList<Level> myLevelArray = new ArrayList<Level>();
@@ -112,6 +105,7 @@ public class Main extends Application {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private void step (double elapsedTime, Stage stage) throws FileNotFoundException {
 		
 		if(currentLevel.isGameOver()) {
@@ -123,12 +117,12 @@ public class Main extends Application {
 		currentBadGuys = currentLevel.getBadGuys();
 		//projectile movement - Chris
 		ArrayList<Projectile> myProjectiles = ship.getMyProjectiles();
-		System.out.println(currentLevelNum);
+		// System.out.println(currentLevelNum);
 		
 		if(currentLevel.isLevelBeat()) {
 			currentLevelNum += 1;
 			if(currentLevelNum >= myLevelArray.size()) {
-				System.out.println("Game Beat");
+				// System.out.println("Game Beat");
 				myEndGameScreen = new GameOverScreen(2);
 				myEndGameScreen.addToScreen(myRoot);
 				return;
@@ -179,19 +173,6 @@ public class Main extends Application {
 				}
 			}
 		}
-		// check for no more bad guys - Chris
-		checkNoMoreBadGuys(currentLevel);
-	}
-
-	private void checkNoMoreBadGuys(Level currentLevel) {
-//		// debug printouts
-//		if (currentLevel.getNumEnemies() == 0) {
-//			System.out.println("level over");
-//		} else {
-//			System.out.println(currentLevel.getNumEnemies());
-//		}
-		
-		// need to iterate through levels or game over screen
 	}
 	
 	private void populateLevelArray(ArrayList<Level> levelArray) {
