@@ -11,31 +11,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class PlayerShipLives extends GameObject {
-	
+
 	private final static String SHIP_IMAGE = "resources/galagaship.gif";
-	private final int SHIP_SIZE = 75;
+	private static final double SHIP_SIZE = 40;
 
-
-
+	//creates a playership iamge for lives
 	public PlayerShipLives(int x, int y) throws FileNotFoundException {
-		super("resources/galagaship.gif",40,40, new Point2D(x,y));
+		super("resources/galagaship.gif",SHIP_SIZE,SHIP_SIZE, new Point2D(x,y));
 
 	}
-	
+	//lose a life
 	public void liveLost(Group root) {
 		root.getChildren().remove(myView);
 	}
-
-
-	public Image setImage() {
-		Image image = null;
-		try {
-			image = new Image(new FileInputStream(SHIP_IMAGE));
-		} catch (FileNotFoundException e1) {
-			System.out.println("File Not Found");
-		}
-		return image;
-	}
-
-
 }
