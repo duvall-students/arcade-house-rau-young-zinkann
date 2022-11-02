@@ -23,13 +23,15 @@ public class Level {
 	private ArrayList<ArrayList<BadGuy>> myBadGuys = new ArrayList<ArrayList<BadGuy>>();
 	private double badGuySpeed;
 	private String imagePath = "resources/badGuy.gif";
+	private int numLives;
 	
-	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed) {
+	public Level(int numRows, int numEnemiesPerRow, int badGuyHealth, double badGuySpeed, int numLives) {
 		numEnemies = numRows * numEnemiesPerRow;
 		this.numRows = numRows;
 		this.numEnemiesPerRow = numEnemiesPerRow;
 		this.badGuyHealth = badGuyHealth;
 		this.badGuySpeed = badGuySpeed;
+		this.numLives = numLives;
 	}
 	
 	public void addEnemies(Group root) throws FileNotFoundException {
@@ -75,5 +77,25 @@ public class Level {
 
 	public void removeEnemy() {
 		numEnemies -= 1;
+	}
+	public void removeLife() {
+		numLives -= 1;
+	}
+	
+	public boolean isLevelBeat() {
+		if(numEnemies == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	public boolean isGameOver() {
+		if(numLives == 0) {
+			return true;
+		}
+		else return false;
 	}
 }
